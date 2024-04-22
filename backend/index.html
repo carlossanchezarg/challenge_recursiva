@@ -15,33 +15,4 @@
     </form>
 
   </body>
-  <script>     
-
-    // Attach a submit handler to the form 
-  // Attach a submit handler to the form 
-
-
-$("#uploadForm").submit(function(event) {
-
-    var formData = new FormData();
-    formData.append("uploadFiles", $('[name="file"]')[0].files[0]);
-    event.stopPropagation();
-    event.preventDefault();
-    $.ajax({
-      url: $(this).attr("action"),
-      data: formData,
-      processData: false,
-      contentType: false,
-      type: 'POST',
-      success: function(data) {
-        alert(data);
-        loadFiles()
-      }
-    });
-    return false;
-  });
-
-    </script>
-
-  
 </html>
