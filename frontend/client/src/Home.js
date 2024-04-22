@@ -8,12 +8,15 @@ import
  import Table from 'react-bootstrap/Table';
  import ListGroup from 'react-bootstrap/ListGroup';
  import Accordion from 'react-bootstrap/Accordion';
- 
+
+
+ const STATS_API_URL = 'http://localhost:3000/stats';
+
 function Home() {
 
     const [stats, setStats] = useState([])
     useEffect(() => {
-      axios.get('http://localhost:3000/stats')
+      axios.get(STATS_API_URL)
         .then((res) => {
           setStats(res.data);
         })

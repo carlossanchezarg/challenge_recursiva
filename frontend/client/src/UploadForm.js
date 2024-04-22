@@ -3,10 +3,10 @@ import { Container, Form, Button, Card } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import './App.css';
 
-const API_URL_UPLOAD = 'http://localhost:3000/uploadCsv';
+const UPLOADCSV_API =  'http://localhost:3000/uploadCsv';
 
 function FormUpload(props) {
-  const [csvData, setCsvData] = useState([]);
+  //const [csvData, setCsvData] = useState([]);
 
   const formData = new FormData();
 
@@ -24,7 +24,7 @@ function FormUpload(props) {
     const data = new FormData();
     data.append("fileName", myFile);
     //data.append("otherStuff", "stuff from a text input");
-    fetch(API_URL_UPLOAD, {
+    fetch(UPLOADCSV_API, {
         method: "POST",
         body: data
     });
