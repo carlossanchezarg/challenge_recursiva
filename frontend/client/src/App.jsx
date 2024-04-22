@@ -13,7 +13,6 @@ function App() {
 
   return (
     <div className='grid-container'>
-            <Header/>
             <Home/>
     </div>
   )

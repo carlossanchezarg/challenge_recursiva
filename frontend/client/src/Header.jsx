@@ -1,19 +1,16 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+import RecursivaIcon from './assets/LogoRecursiva.png'
 
 function Header() {
   return (
-      <Navbar className="bg-body-tertiary">
+      <Navbar className="bg-success bg-gradient">
         <Container>
           <Navbar.Brand href="#home">
-            <img
-              alt=""
-              src="/assets/LogoRecursiva.png"
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-            />{' '}
-            Challenge Recursiva
+          <img src={RecursivaIcon}  
+                     width="" height="50" 
+                     alt="Logo" /> 
+            
           </Navbar.Brand>
         </Container>
       </Navbar>

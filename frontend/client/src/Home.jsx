@@ -1,10 +1,12 @@
 import React from 'react'
+import { Routes, Route } from "react-router-dom"
+import UploadForm from './UploadForm'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import 
 { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill, BsFillPersonVcardFill}
  from 'react-icons/bs'
- //import racingIcon from './assets/racingIcon.png'
+ import RacingIcon from './assets/RacingIcon.png'
  import Toast from 'react-bootstrap/Toast';
  import Table from 'react-bootstrap/Table';
  import ListGroup from 'react-bootstrap/ListGroup';
@@ -21,7 +23,9 @@ function Home() {
     }, [])
 
   return (
+
     <main className='main-container'>
+       
         <div className='main-title'>
             <h3>DASHBOARD</h3>
         </div>
@@ -37,14 +41,19 @@ function Home() {
             <div className='card'>
                 <div className='card-inner'>
                     <h3>PROMEDIO DE EDAD SOCIOS DE RACING</h3>
-                    <racingIcon className='card_icon'/>
+                    <img src={RacingIcon}  
+                     width="50" height="50" 
+                     alt="Logo" /> 
+                   
                 </div>
                 <h1>{stats.edadAvgSociosRacing}</h1>
             </div>
             <div className='card'>
                 <div className='card-inner'>
                     <h3>TOP 5: NOMBRES HINCHAS DE RACING</h3>
-                    <BsPeopleFill className='card_icon'/>
+                    <img src={RacingIcon}  
+                     width="50" height="50" 
+                     alt="Logo" /> 
                 </div>
                 <ListGroup>
                 {stats.top5NombresRacing &&
@@ -53,8 +62,7 @@ function Home() {
                         ))}
                 </ListGroup>
                 
-            </div>
-        
+            </div>   
          
     <Toast>
       <Toast.Header>
@@ -118,10 +126,14 @@ function Home() {
     </Table>
     </Toast.Body>
     </Toast>
-  
+
+   
+    
     </main>
+
+    
   )
 }
 
-export default Home
+export default Home;
 
