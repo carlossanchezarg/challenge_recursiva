@@ -4,7 +4,7 @@ import RecursivaIcon from './assets/LogoRecursiva.png'
 
 function Header() {
   return (
-      <Navbar className="bg-success bg-gradient">
+      <Navbar className="bg-secondary bg-gradient">
         <Container>
           <Navbar.Brand href="#home">
           <img src={RecursivaIcon}  

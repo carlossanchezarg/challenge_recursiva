@@ -1,16 +1,13 @@
 import React from 'react'
-import { Routes, Route } from "react-router-dom"
-import UploadForm from './UploadForm'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import 
-{ BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill, BsFillPersonVcardFill}
+{ BsFillPersonVcardFill}
  from 'react-icons/bs'
  import RacingIcon from './assets/RacingIcon.png'
- import Toast from 'react-bootstrap/Toast';
  import Table from 'react-bootstrap/Table';
  import ListGroup from 'react-bootstrap/ListGroup';
-
+ import Accordion from 'react-bootstrap/Accordion';
  
 function Home() {
 
@@ -25,11 +22,69 @@ function Home() {
   return (
 
     <main className='main-container'>
-       
         <div className='main-title'>
-            <h3>DASHBOARD</h3>
+            <h3>DASHBOARD: ESTADISTICAS DE LOS SOCIOS DEL CLUB</h3>
         </div>
-
+        <Accordion defaultActiveKey="0">
+      <Accordion.Item eventKey="1">
+        <Accordion.Header>
+        <strong className="me-auto"> TOP 100 por edad: Socios casados con estudios univ.</strong>
+        </Accordion.Header>
+        <Accordion.Body>
+        <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Edad</th>
+          <th>Equipo</th>
+        </tr>
+      </thead>
+      <tbody>
+      {stats.personasCasadasConEstudiosList &&
+          (stats.personasCasadasConEstudiosList).map((persona, index) => (
+            <tr>
+               <td>{index+1} </td>
+              <td>{persona.Nombre} </td>
+              <td> {persona.Edad}</td> 
+              <td>{persona.Equipo}</td>
+            </tr>
+           ))}
+    </tbody>
+    </Table>
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item eventKey="2">
+        <Accordion.Header>
+        <strong className="me-auto"> Estadisticas: socios por equipo</strong>
+        </Accordion.Header>
+        <Accordion.Body>
+        <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Equipo</th>
+          <th>Edad promedio</th>
+          <th>Menor edad</th>
+          <th>Mayor edad</th>
+        </tr>
+      </thead>
+      <tbody>
+      {stats.statsEquiposList &&
+          (stats.statsEquiposList).map((equipo, index) => (
+            <tr>
+               <td>{index+1} </td>
+              <td>{equipo.equipo} </td>
+              <td> {equipo.edadAvg}</td>
+              <td>{equipo.edadMin}</td> 
+              <td>{equipo.edadMax}</td>
+            </tr>
+           ))}
+    </tbody>
+    </Table>
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
         <div className='main-cards'>
             <div className='card'>
                 <div className='card-inner'>
@@ -63,71 +118,7 @@ function Home() {
                 </ListGroup>
                 
             </div>   
-         
-    <Toast>
-      <Toast.Header>
-      <strong className="me-auto">Etadisticas socios por equipo</strong>
-      </Toast.Header>
-      <Toast.Body>
-      <div className='card'>    
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Equipo</th>
-          <th>Edad promedio</th>
-          <th>Menor edad</th>
-          <th>Mayor edad</th>
-        </tr>
-      </thead>
-      <tbody>
-      {stats.statsEquiposList &&
-          (stats.statsEquiposList).map((equipo, index) => (
-            <tr>
-               <td>{index+1} </td>
-              <td>{equipo.equipo} </td>
-              <td> {equipo.edadAvg}</td>
-              <td>{equipo.edadMin}</td> 
-              <td>{equipo.edadMax}</td>
-            </tr>
-           ))}
-    </tbody>
-    </Table>
-    </div>
-    </Toast.Body>
-    </Toast>
     </div>  
-    
-    <Toast>
-      <Toast.Header>
-      <strong className="me-auto">100 personas mas jovenes</strong>
-      </Toast.Header>
-      <Toast.Body>
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Nombre</th>
-          <th>Edad</th>
-          <th>Equipo</th>
-        </tr>
-      </thead>
-      <tbody>
-      {stats.personasCasadasConEstudiosList &&
-          (stats.personasCasadasConEstudiosList).map((persona, index) => (
-            <tr>
-               <td>{index+1} </td>
-              <td>{persona.Nombre} </td>
-              <td> {persona.Edad}</td> 
-              <td>{persona.Equipo}</td>
-            </tr>
-           ))}
-    </tbody>
-    </Table>
-    </Toast.Body>
-    </Toast>
-
-   
     
     </main>
 
