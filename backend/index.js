@@ -3,14 +3,23 @@
 //*************** */
 const express = require('express');
 const multer = require('multer');  
+const cors = require('cors')
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
+const jsonfile = require('jsonfile');
 const csv2json = require('convert-csv-to-json');
 const addLineAtTop = require('./utils/filesUtils');
 const statsSociosDashboard = require('./utils/statsDashboard');
 const app = express();
 const port = 3000;
+
+var corsOptions = {
+  origin: "http://localhost:3000/"
+};
+
+app.use(cors());
+
 
 //********************* */
 // Multer Configuration
@@ -30,7 +39,8 @@ const upload = multer({ storage });
 //Upload form endpoint
 //******************* */
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname + "/index.html"));
+    //res.json({ message: "Welcome to the file upload form." });
+    res.sendFile(path.join(__dirname, 'index.html'));
   });
 
 
@@ -49,9 +59,25 @@ app.post('/uploadCsv', upload.single('fileName'), (req, res) => {
     let jsonData = csv2json.getJsonFromCsv(req.file.path);
     
     const jsonStats = statsSociosDashboard(jsonData);
+    
+    const outStats = JSON.stringify(statsSociosDashboard(jsonData));
 
-    res.json(jsonStats);
+    fs.writeFile('stats/outStats.json', outStats, 'utf8', (err) => { 
+        if (err) throw err;
+    });
+        
+    res.json({ message: 'Archivo cargado con éxito.', jsonStats });
+    res.redirect('/stats');
 });
+
+//********************* */
+// JSON stats Endpoint
+//********************* */
+app.get('/stats', (req, res) => {  
+  const stats = jsonfile.readFileSync('stats/outStats.json');
+  res.json(stats);
+});
+
   
 
 app.listen(port, () => {
