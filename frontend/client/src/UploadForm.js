@@ -23,7 +23,7 @@ function FormUpload(props) {
     const myFile = document.querySelector("input[type=file]").files[0];
     const data = new FormData();
     data.append("fileName", myFile);
-    fetch(UPLOADCSV_API, {
+    await fetch(UPLOADCSV_API, {
         method: "POST",
         body: data
     });
