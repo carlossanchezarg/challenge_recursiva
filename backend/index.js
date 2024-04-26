@@ -52,7 +52,6 @@ app.post('/uploadCsv', upload.single('fileName'), (req, res) => {
       return res.status(400).json({ error: 'No ha cargado ningun archivo.' });
     }
 
-    // agrego header para facilitar la conversión a JSON.
     const headerCsv = 'Nombre;Edad;Equipo;EstadoCivil;NivelDeEstudios\n';
     addLineAtTop(req.file.path, headerCsv);
 
@@ -66,8 +65,7 @@ app.post('/uploadCsv', upload.single('fileName'), (req, res) => {
         if (err) throw err;
     });
         
-    res.json({ message: 'Archivo cargado con éxito.', jsonStats });
-    res.redirect('/stats');
+    res.json(jsonStats);
 });
 
 //********************* */
